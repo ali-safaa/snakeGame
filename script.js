@@ -1,4 +1,6 @@
 let playBoard = document.querySelector("[data-playBoard]");
+let scoreElement = document.querySelector("[data-score]");
+let highScoreElement = document.querySelector("[data-highScore]");
 
 let foodX;
 let foodY;
@@ -9,6 +11,9 @@ let velocityY = 0;
 let snakeBody = [];
 let gameOver = false;
 let setIntervalId;
+let score = 0;
+let highScore = localStorage.getItem("highScore") || 0;
+highScoreElement.innerText = `high score: ${highScore}`;
 
 function initGame() {
      if (gameOver) return handleGameOver();
@@ -19,11 +24,21 @@ function initGame() {
      if (snakeX == foodX && snakeY == foodY) {
           changeFoodPosition();
           snakeBody.push([foodX, foodY]);
-          console.log(snakeBody);
+          score++;
+          highScore = score >= highScore ? score : highScore;
+          localStorage.setItem("highScore", highScore);
+          scoreElement.innerText = `score: ${score}`;
      }
      let htmlMarkup = `<div class="food" style="grid-area: ${foodY} / ${foodX}"></div>`;
      for (let i = 0; i < snakeBody.length; i++) {
           htmlMarkup += `<div class="head" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
+          if (
+               i !== 0 &&
+               snakeBody[0][1] === snakeBody[i][1] &&
+               snakeBody[0][0] === snakeBody[i][0]
+          ) {
+               gameOver = true;
+          }
      }
      for (i = snakeBody.length - 1; i > 0; i--) {
           snakeBody[i] = snakeBody[i - 1];
@@ -72,5 +87,5 @@ initGame();
 
 function handleGameOver() {
      clearInterval(setIntervalId);
-     alert("you are dead, press ok to continue");
+     alert("you are dead, please reload page to continue");
 }
