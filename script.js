@@ -1,6 +1,10 @@
-let playBoard = document.querySelector("[data-playBoard]");
-let scoreElement = document.querySelector("[data-score]");
-let highScoreElement = document.querySelector("[data-highScore]");
+const playBoard = document.querySelector("[data-playBoard]");
+const scoreElement = document.querySelector("[data-score]");
+const highScoreElement = document.querySelector("[data-highScore]");
+const left = document.querySelector("[data-left]");
+const right = document.querySelector("[data-right]");
+const up = document.querySelector("[data-up]");
+const down = document.querySelector("[data-down]");
 
 let foodX;
 let foodY;
@@ -53,6 +57,10 @@ function initGame() {
 setIntervalId = setInterval(initGame, 125);
 
 document.addEventListener("keydown", changeDirection);
+left.addEventListener("click", leftDirection);
+right.addEventListener("click", rightDirection);
+up.addEventListener("click", upDirection);
+down.addEventListener("click", downDirection);
 
 function changeDirection(e) {
      switch (e.key) {
@@ -77,6 +85,27 @@ function changeDirection(e) {
      }
      initGame();
 }
+
+function leftDirection() {
+     velocityX = -1;
+     velocityY = 0;
+}
+
+function rightDirection() {
+     velocityX = 1;
+     velocityY = 0;
+}
+
+function upDirection() {
+     velocityX = 0;
+     velocityY = -1;
+}
+
+function downDirection() {
+     velocityX = 0;
+     velocityY = 1;
+}
+
 function changeFoodPosition() {
      foodX = Math.floor(Math.random() * 30) + 1;
      foodY = Math.floor(Math.random() * 30) + 1;

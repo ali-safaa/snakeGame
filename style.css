@@ -33,3 +33,35 @@
 .head {
      background-color: rgb(147, 147, 243);
 }
+
+.buttons {
+     margin-top: 20px;
+     margin-left: 20px;
+}
+
+.left {
+     border: none;
+     padding: 10px 40px;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.right {
+     border: none;
+     padding: 10px 40px;
+     border-radius: 5px;
+     cursor: pointer;
+}
+.up {
+     border: none;
+     padding: 10px 40px;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.down {
+     border: none;
+     padding: 10px 40px;
+     border-radius: 5px;
+     cursor: pointer;
+}
